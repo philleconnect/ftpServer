@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+
+  ftp:
+    build: .
+    container_name: ftp
+    hostname: ftp
+    #depends_on:
+    #  - ldap
+    # Wait for the LDAP to be up and running:
+#    command: >
+#      /bin/bash -c "
+#        while ! nc -z ldap 389;
+#        do
+#          echo 'waiting for LDAP...';
+#          sleep 1;
+#        done;
+#        echo 'LDAP-Server found, starting now';
+#      "
+    restart: always
+    ports:
+     - "21:21"
+#    environment:
+#    env_file:
+#     - ./settings.env
+#    networks:
+#      - philleconnect
+    volumes:
+      - ../ServerContainers/mount/samba:/home
+
+networks:
+    default:
+        external:
+            name: servercontainers_philleconnect
