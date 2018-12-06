@@ -20,7 +20,9 @@ services:
 #      "
     restart: always
     ports:
+     - "20:20"
      - "21:21"
+     - "20020-20080:20020-20080"
 #    environment:
 #    env_file:
 #     - ./settings.env

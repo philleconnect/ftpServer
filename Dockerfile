@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
       nano
 
 RUN sed -i 's/^ServerName.*$/ServerName ftp/' /etc/proftpd/proftpd.conf && \
+        sed -i 's/^# PassivePorts.*$/PassivePorts 20020 20080/' /etc/proftpd/proftpd.conf && \
+        sed -i 's/^# DefaultRoot.*$/DefaultRoot ~/' /etc/proftpd/proftpd.conf && \
         sed -i 's/^# AuthOrder.*$/AuthOrder mod_ldap.c/' /etc/proftpd/proftpd.conf && \
         sed -i '/^AuthOrder.*$/a LoadModule mod_ldap.c' /etc/proftpd/proftpd.conf && \
         sed -i 's!^#Include /etc/proftpd/ldap.conf$!Include /etc/proftpd/ldap.conf!' /etc/proftpd/proftpd.conf && \
